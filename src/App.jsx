@@ -1,6 +1,15 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
+import Navbar from './components/Navbar';
+import ProtectedRoute from './components/ProtectedRoute';
 import BrowsePage from './pages/BrowsePage';
 import Login from './pages/Login';
-const App = () => <AuthProvider><BrowserRouter><Routes><Route path="/" element={<BrowsePage />} /><Route path="/login" element={<Login />} /></Routes></BrowserRouter></AuthProvider>;
+import Register from './pages/Register';
+import CarDetail from './pages/CarDetail';
+import SellCar from './pages/SellCar';
+import Checkout from './pages/Checkout';
+import OrderSuccess from './pages/OrderSuccess';
+import Messages from './pages/Messages';
+import AdminDashboard from './pages/AdminDashboard';
+const App = () => <AuthProvider><BrowserRouter><Navbar /><Routes><Route path="/" element={<BrowsePage />} /><Route path="/login" element={<Login />} /><Route path="/register" element={<Register />} /><Route path="/cars/:id" element={<CarDetail />} /><Route path="/sell" element={<ProtectedRoute><SellCar /></ProtectedRoute>} /><Route path="/checkout/:id" element={<ProtectedRoute><Checkout /></ProtectedRoute>} /><Route path="/order-success" element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>} /><Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} /><Route path="/admin" element={<ProtectedRoute adminOnly><AdminDashboard /></ProtectedRoute>} /></Routes></BrowserRouter></AuthProvider>;
 export default App;

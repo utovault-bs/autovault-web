@@ -1,0 +1,45 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createCar } from '../api/cars';
+import api from '../api/client';
+const MAKES = ['Acura','Audi','BMW','Buick','Cadillac','Chevrolet','Chrysler','Dodge','Ford','GMC','Honda','Hyundai','Infiniti','Jaguar','Jeep','Kia','Land Rover','Lexus','Lincoln','Mazda','Mercedes-Benz','Mini','Mitsubishi','Nissan','Porsche','Ram','Subaru','Tesla','Toyota','Volkswagen','Volvo'];
+const FUEL_TYPES = ['Gasoline','Diesel','Hybrid','Electric'];
+const TRANSMISSIONS = ['Automatic','Manual','CVT'];
+const BODY_STYLES = ['SUV','Sedan','Coupe','Convertible','Hatchback','Truck','Van','Wagon'];
+const SellCar = () => {
+  const navigate = useNavigate();
+  const [form, setForm] = useState({ make: '', model: '', year: '', trim: '', price: '', mileage: '', transmission: '', fuel_type: '', body_style: '', exterior_color: '', interior_color: '', engine: '', drivetrain: '', description: '', main_image: '', images: [] });
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState('');
+  const set = (key, value) => setForm(f => ({ ...f, [key]: value }));
+  const uploadImages = async (files) => {
+    setUploading(true);
+    const uploaded = [];
+    for (let i = 0; i < files.length; i++) {
+      setProgress(Math.round((i / files.length) * 100));
+      const fd = new FormData();
+      fd.append('image', files[i]);
+      try {
+        const { data } = await api.post('/upload', fd, { headers: { 'Content-Type': 'multipart/form-data' } });
+        uploaded.push(data.url);
+      } catch { setError('Upload failed for ' + files[i].name); }
+    }
+    setProgress(100);
+    setUploading(false);
+    return uploaded;
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+    setError('');
+    try {
+      const urls = await uploadImages(form.images);
+      await createCar({ ...form, images: form.images.length > 0 ? urls : undefined, price: Number(form.price), mileage: Number(form.mileage), year: Number(form.year) });
+      navigate('/');
+    } catch (err) { setError(err.response?.data?.message || 'Failed to create listing'); } finally { setSubmitting(false); }
+  };
+  return <div className="sell-page"><h2>List Your Car</h2>{error && <div className="error-msg">{error}</div>}<form onSubmit={handleSubmit}><div className="form-grid"><select value={form.make} onChange={e => set('make', e.target.value)} required><option value="">Make</option>{MAKES.map(m => <option key={m} value={m}>{m}</option>)}</select><input type="text" placeholder="Model" value={form.model} onChange={e => set('model', e.target.value)} required /><input type="number" placeholder="Year" value={form.year} onChange={e => set('year', e.target.value)} required /><input type="text" placeholder="Trim (e.g. EX-L)" value={form.trim} onChange={e => set('trim', e.target.value)} /><input type="number" placeholder="Price ($)" value={form.price} onChange={e => set('price', e.target.value)} required /><input type="number" placeholder="Mileage" value={form.mileage} onChange={e => set('mileage', e.target.value)} required /><select value={form.transmission} onChange={e => set('transmission', e.target.value)} required><option value="">Transmission</option>{TRANSMISSIONS.map(t => <option key={t} value={t}>{t}</option>)}</select><select value={form.fuel_type} onChange={e => set('fuel_type', e.target.value)} required><option value="">Fuel Type</option>{FUEL_TYPES.map(f => <option key={f} value={f}>{f}</option>)}</select><select value={form.body_style} onChange={e => set('body_style', e.target.value)} required><option value="">Body Style</option>{BODY_STYLES.map(b => <option key={b} value={b}>{b}</option>)}</select><input type="text" placeholder="Exterior Color" value={form.exterior_color} onChange={e => set('exterior_color', e.target.value)} required /><input type="text" placeholder="Interior Color" value={form.interior_color} onChange={e => set('interior_color', e.target.value)} required /><input type="text" placeholder="Engine (e.g. 2.0L I4)" value={form.engine} onChange={e => set('engine', e.target.value)} required /></div><input type="text" placeholder="Drivetrain (e.g. AWD, RWD)" value={form.drivetrain} onChange={e => set('drivetrain', e.target.value)} /><textarea placeholder="Description â€” highlight key features, condition, history..." value={form.description} onChange={e => set('description', e.target.value)} rows={4} /><div className="image-upload"><label className="upload-btn"><input type="file" multiple accept="image/*" style={{ display: 'none' }} onChange={e => set('images', Array.from(e.target.files))} />Upload Images</label>{uploading && <div className="progress-bar"><div style={{ width: progress + '%' }} /><span>{progress}%</span></div>}</div><button className="btn-submit" type="submit" disabled={submitting || uploading}>{submitting ? 'Listing...' : 'List Car for Sale'}</button></form></div>;
+};
+export default SellCar;

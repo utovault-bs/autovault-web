@@ -1,5 +1,5 @@
 /* ==============================
-   AutoVault — Global Styles
+   AutoVault â€” Global Styles
    ============================== */
 
 *,
@@ -658,6 +658,447 @@ input, select, textarea {
   background: var(--red-600);
   color: white;
   border-color: var(--red-600);
+}
+
+/* Car Card */
+.car-card {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.car-card:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.car-image {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--gray-100);
+}
+.car-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.badge.sold {
+  background: var(--red-600);
+  color: white;
+}
+.car-info {
+  padding: 16px;
+}
+.car-info h3 {
+  font-size: 1.05rem;
+  margin-bottom: 4px;
+}
+.car-info .trim {
+  font-size: 0.85rem;
+  color: var(--gray-600);
+  margin-bottom: 12px;
+}
+.car-info .details {
+  display: flex;
+  gap: 12px;
+  font-size: 0.8rem;
+  color: var(--gray-600);
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+.price-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.price {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+.original-price {
+  font-size: 0.85rem;
+  color: var(--gray-400);
+  text-decoration: line-through;
+}
+.btn-view {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  background: var(--gray-100);
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s;
+}
+.btn-view:hover {
+  background: var(--gray-200);
+}
+
+/* Car Filters */
+.car-filters {
+  margin-bottom: 24px;
+}
+.car-filters .search-bar {
+  margin-bottom: 12px;
+}
+.car-filters .filter-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.car-filters .filter-grid select,
+.car-filters .filter-grid input {
+  padding: 10px 12px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  outline: none;
+  font-size: 0.85rem;
+  background: var(--white);
+}
+.car-filters .filter-grid select:focus,
+.car-filters .filter-grid input:focus {
+  border-color: var(--black);
+}
+.clear-filters {
+  padding: 8px 16px;
+  background: none;
+  border: 1px solid var(--gray-200);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  color: var(--gray-600);
+}
+.clear-filters:hover {
+  border-color: var(--black);
+  color: var(--black);
+}
+
+/* Car Detail */
+.car-detail {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px;
+}
+.detail-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+@media (max-width: 900px) {
+  .detail-container {
+    grid-template-columns: 1fr;
+  }
+}
+.gallery {
+  position: sticky;
+  top: 90px;
+  align-self: start;
+}
+.main-image {
+  aspect-ratio: 16 / 10;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--gray-100);
+  margin-bottom: 12px;
+}
+.main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.thumbnails {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+}
+.thumbnails button {
+  flex-shrink: 0;
+  width: 80px;
+  height: 60px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background: none;
+  padding: 0;
+  transition: border-color 0.2s;
+}
+.thumbnails button.active {
+  border-color: var(--black);
+}
+.thumbnails button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.detail-header {
+  margin-bottom: 24px;
+}
+.detail-header h1 {
+  font-size: 1.75rem;
+  margin-bottom: 4px;
+}
+.detail-trim {
+  color: var(--gray-600);
+  margin-bottom: 12px;
+}
+.detail-price {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+.detail-price .original {
+  font-size: 1.1rem;
+  color: var(--gray-400);
+  text-decoration: line-through;
+  margin-left: 12px;
+  font-weight: 400;
+}
+.sold-badge-lg {
+  display: inline-block;
+  padding: 8px 24px;
+  background: var(--red-600);
+  color: white;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 24px;
+  background: var(--gray-100);
+  border-radius: 12px;
+}
+.specs-grid div {
+  display: flex;
+  flex-direction: column;
+}
+.specs-grid .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gray-600);
+  margin-bottom: 2px;
+}
+.specs-grid .value {
+  font-weight: 600;
+}
+.description {
+  margin-bottom: 24px;
+}
+.description h3 {
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+}
+.description p {
+  color: var(--gray-700);
+  line-height: 1.7;
+}
+.seller-info {
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+}
+.seller-info h3 {
+  font-size: 0.85rem;
+  color: var(--gray-600);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.seller-name {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.btn-buy {
+  width: 100%;
+  padding: 16px;
+  background: var(--green-600);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  transition: opacity 0.2s;
+}
+.btn-buy:hover {
+  opacity: 0.9;
+}
+.contact-seller {
+  padding: 24px;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  border-radius: 12px;
+}
+.contact-seller h3 {
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+.contact-seller textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  outline: none;
+  resize: vertical;
+}
+.contact-seller textarea:focus {
+  border-color: var(--black);
+}
+.contact-seller button {
+  padding: 12px 24px;
+  background: var(--black);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+.contact-seller button:disabled {
+  opacity: 0.5;
+}
+.msg-success {
+  color: var(--green-600);
+  font-weight: 500;
+}
+
+/* Messages Page */
+.messages-page {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 24px;
+  height: calc(100vh - 80px);
+}
+@media (max-width: 768px) {
+  .messages-page {
+    grid-template-columns: 1fr;
+  }
+}
+.conv-list {
+  border-right: 1px solid var(--gray-200);
+  padding-right: 16px;
+  overflow-y: auto;
+}
+.conv-list h3 {
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+.no-conv {
+  color: var(--gray-600);
+  font-size: 0.9rem;
+}
+.conv-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 12px;
+  border: none;
+  background: none;
+  border-radius: 8px;
+  margin-bottom: 4px;
+  cursor: pointer;
+}
+.conv-item.active {
+  background: var(--gray-100);
+}
+.conv-item strong {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+}
+.conv-item .last-msg {
+  font-size: 0.8rem;
+  color: var(--gray-600);
+}
+.msg-area {
+  display: flex;
+  flex-direction: column;
+  padding-left: 24px;
+}
+.msg-header {
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--gray-200);
+  margin-bottom: 16px;
+}
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 16px;
+}
+.msg {
+  display: flex;
+  margin-bottom: 12px;
+}
+.msg.own {
+  justify-content: flex-end;
+}
+.msg-bubble {
+  max-width: 70%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: var(--gray-100);
+}
+.msg.own .msg-bubble {
+  background: var(--black);
+  color: white;
+}
+.msg-bubble p {
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+}
+.msg-time {
+  font-size: 0.7rem;
+  opacity: 0.6;
+}
+.msg-input {
+  display: flex;
+  gap: 8px;
+}
+.msg-input input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1px solid var(--gray-200);
+  border-radius: 8px;
+  outline: none;
+}
+.msg-input input:focus {
+  border-color: var(--black);
+}
+.msg-input button {
+  padding: 12px 24px;
+  background: var(--black);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+}
+
+/* User name in navbar */
+.user-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0 8px;
 }
 
 /* Utility */

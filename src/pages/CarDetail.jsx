@@ -1,0 +1,27 @@
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import { getCarById } from '../api/cars';
+import api from '../api/client';
+const CarDetail = () => {
+  const { id } = useParams();
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const [car, setCar] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [activeImage, setActiveImage] = useState(0);
+  const [msg, setMsg] = useState('');
+  const [msgSent, setMsgSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  useEffect(() => { setLoading(true); getCarById(id).then(({ data }) => { setCar(data); setLoading(false); }).catch(() => { setError('Car not found'); setLoading(false); }); }, [id]);
+  const formatPrice = (p) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(p);
+  const handleBuy = () => { if (!user) return navigate('/login'); navigate(`/checkout/${car.id}`); };
+  const sendMessage = async (e) => { e.preventDefault(); if (!user) return navigate('/login'); setSending(true); try { await api.post('/messages', { carId: car.id, content: msg }); setMsgSent(true); setMsg(''); } catch { setError('Failed to send message'); } finally { setSending(false); } };
+  if (loading) return <div className="spinner">Loading...</div>;
+  if (error) return <div className="error">{error}</div>;
+  if (!car) return null;
+  const images = car.images?.length ? car.images : [{ url: car.main_image || '/placeholder-car.jpg' }];
+  return <div className="car-detail"><div className="detail-container"><div className="gallery"><div className="main-image"><img src={images[activeImage]?.url} alt={`${car.year} ${car.make} ${car.model}`} /></div>{images.length > 1 && <div className="thumbnails">{images.map((img, i) => <button key={i} className={i === activeImage ? 'active' : ''} onClick={() => setActiveImage(i)}><img src={img.url} alt="" /></button>)}</div>}</div><div className="detail-info"><div className="detail-header"><h1>{car.year} {car.make} {car.model}</h1><p className="detail-trim">{car.trim}</p><div className="detail-price">{formatPrice(car.price)}{car.originalPrice > car.price && <span className="original">{formatPrice(car.originalPrice)}</span>}</div></div>{car.status === 'sold' && <div className="sold-badge-lg">SOLD</div>}<div className="specs-grid"><div><span className="label">Mileage</span><span className="value">{car.mileage?.toLocaleString()} mi</span></div><div><span className="label">Transmission</span><span className="value">{car.transmission}</span></div><div><span className="label">Fuel Type</span><span className="value">{car.fuel_type}</span></div><div><span className="label">Body Style</span><span className="value">{car.body_style}</span></div><div><span className="label">Exterior Color</span><span className="value">{car.exterior_color}</span></div><div><span className="label">Interior Color</span><span className="value">{car.interior_color}</span></div><div><span className="label">Engine</span><span className="value">{car.engine}</span></div><div><span className="label">Drivetrain</span><span className="value">{car.drivetrain || 'N/A'}</span></div></div>{car.description && <div className="description"><h3>Description</h3><p>{car.description}</p></div>}<div className="seller-info"><h3>Seller</h3><p className="seller-name">{car.seller_name}</p></div>{car.status !== 'sold' && <button className="btn-buy" onClick={handleBuy}>Buy Now â€” {formatPrice(car.price)}</button>}<div className="contact-seller"><h3>Ask a Question</h3>{msgSent ? <p className="msg-success">Message sent! The seller will contact you.</p> : <form onSubmit={sendMessage}><textarea placeholder="Ask about this car..." value={msg} onChange={e => setMsg(e.target.value)} rows={3} required /><button type="submit" disabled={sending}>{sending ? 'Sending...' : 'Send Message'}</button></form>}</div></div></div></div>;
+};
+export default CarDetail;
