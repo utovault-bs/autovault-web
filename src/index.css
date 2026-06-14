@@ -103,7 +103,9 @@ select option { background: var(--surface); color: var(--text); }
 /* Browse */
 .browse-page { max-width: 1400px; margin: 0 auto; padding: 24px; }
 .browse-header { margin-bottom: 24px; text-align: center; }
-.browse-header h1 { font-size: 1.75rem; margin-bottom: 20px; }
+.browse-header h1 { font-size: 1.75rem; margin-bottom: 12px; }
+.sell-cta { display: inline-block; margin-bottom: 20px; padding: 10px 28px; background: var(--red); color: #fff; border-radius: var(--radius); font-weight: 600; text-decoration: none; transition: background 0.2s; }
+.sell-cta:hover { background: var(--red-hover); color: #fff; }
 .browse-header .subtitle { color: var(--text2); font-size: 1rem; margin-bottom: 24px; }
 .filters-panel { max-width: 900px; margin-left: auto; margin-right: auto; background: var(--surface); border-radius: 12px; padding: 20px; margin-bottom: 36px; border: 1px solid var(--border); }
 .filters-header { display: flex; gap: 16px; align-items: center; margin-bottom: 12px; }

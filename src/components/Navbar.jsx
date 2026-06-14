@@ -22,10 +22,10 @@ const Navbar = () => {
       <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
         <Link to="/" onClick={() => setMenuOpen(false)}>Cars</Link>
         <Link to="/plates" onClick={() => setMenuOpen(false)}>Plates</Link>
+        <Link to="/sell" onClick={() => setMenuOpen(false)}>Sell Car</Link>
+        <Link to="/plates/sell" onClick={() => setMenuOpen(false)}>Sell Plate</Link>
         {user ? (
           <>
-            <Link to="/sell" onClick={() => setMenuOpen(false)}>Sell Car</Link>
-            <Link to="/plates/sell" onClick={() => setMenuOpen(false)}>Sell Plate</Link>
             <Link to="/messages" onClick={() => setMenuOpen(false)}>Messages</Link>
             {isAdmin() && <Link to="/admin" onClick={() => setMenuOpen(false)}>Admin</Link>}
             <span className="user-name">{user.name}</span>
