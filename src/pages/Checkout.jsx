@@ -18,8 +18,7 @@ const Checkout = () => {
     setError('');
     try {
       const { data } = await api.post('/payments/create-intent', { carId: car.id, amount: car.price * 100 });
-      const clientSecret = data.clientSecret;
-      await api.post('/orders/confirm', { paymentIntentId: clientSecret, carId: car.id });
+      await api.post('/orders/confirm', { paymentIntentId: data.paymentIntentId, carId: car.id });
       navigate(`/order-success?carId=${car.id}&amount=${car.price}`);
     } catch (err) { setError(err.response?.data?.message || 'Payment failed'); } finally { setProcessing(false); }
   };
