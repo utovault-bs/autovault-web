@@ -131,7 +131,7 @@ select option { background: var(--surface); color: var(--text); }
 .filter-chips button.active { background: var(--red); color: #fff; border-color: var(--red); }
 .range-inputs { display: flex; align-items: center; gap: 8px; }
 .range-inputs input { width: 100px; }
-.results-header { margin-bottom: 16px; color: var(--text2); }
+.results-header { margin-bottom: 16px; color: var(--text2); text-align: center; }
 .car-grid, .cars-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
 .loading-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
 .skeleton-card { height: 360px; background: var(--surface2); border-radius: 12px; }
