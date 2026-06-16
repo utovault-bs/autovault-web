@@ -10,7 +10,7 @@ const COLORS = ['Black','White','Silver','Gray','Blue','Red','Green','Brown','Be
 const CONDITIONS = ['New','Used','Refurbished'];
 const RADII = [10, 25, 50, 100, 200, 500];
 const CarFilters = ({ filters, onChange }) => {
-  const set = (key, value) => onChange({ ...filters, [key]: value, page: 1 });
+  const set = (key, value) => onChange(prev => ({ ...prev, [key]: value, page: 1 }));
   const clear = () => onChange({ search: '', make: '', model: '', minPrice: '', maxPrice: '', fuel_type: '', transmission: '', body_style: '', minYear: '', maxYear: '', maxMileage: '', color: '', condition: '', zip: '', lat: '', lng: '', radius: '', sortBy: 'newest', page: 1 });
   const getLocation = () => {
     navigator.geolocation.getCurrentPosition(pos => {
