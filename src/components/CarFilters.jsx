@@ -21,6 +21,7 @@ const CarFilters = ({ filters, onChange }) => {
   };
   const hasDist = filters.lat || filters.zip;
   const distSort = hasDist ? [['distance','Nearest']] : [];
+  const hasFilters = filters.search || filters.make || filters.model || filters.minPrice || filters.maxPrice || filters.fuel_type || filters.transmission || filters.body_style || filters.minYear || filters.maxYear || filters.maxMileage || filters.color || filters.condition || filters.zip || filters.lat || filters.lng || filters.radius;
   return <div className="car-filters">
     <div className="search-bar">
       <input type="text" placeholder="Search make, model, or keyword..." value={filters.search} onChange={e => set('search', e.target.value)} />
