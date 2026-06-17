@@ -108,6 +108,7 @@ select option { background: var(--surface); color: var(--text); }
   padding: 8px 16px; border-radius: var(--radius); color: var(--text); transition: background 0.2s;
 }
 .nav-links a:hover, .nav-links button:hover { background: var(--surface2); }
+.nav-links a.active { color: var(--red); font-weight: 600; }
 .nav-links .btn-primary { background: var(--red); color: #fff; }
 .nav-links .btn-primary:hover { background: var(--red-hover); }
 .user-name { font-weight: 600; font-size: 0.9rem; padding: 0 8px; color: var(--text2); }

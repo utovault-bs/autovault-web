@@ -7,7 +7,7 @@ import ModelSelect from '../components/ModelSelect';
 const US_STATES = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
 const FUEL_TYPES = ['Gasoline','Diesel','Hybrid','Electric'];
 const TRANSMISSIONS = ['Automatic','Manual','CVT'];
-const BODY_STYLES = ['SUV','Sedan','Coupe','Convertible','Hatchback','Truck','Van','Wagon'];
+const BODY_STYLES = ['SUV','Sedan','Coupe','Convertible','Hatchback','Truck','Mini Truck','Van','Wagon'];
 const CONDITIONS = ['New','Used','Refurbished'];
 const SellCar = () => {
   const navigate = useNavigate();

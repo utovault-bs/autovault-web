@@ -2,7 +2,7 @@ import { useState } from 'react';
 import MakeSelect, { MAKES } from './MakeSelect';
 const FUEL_TYPES = ['Gasoline','Diesel','Hybrid','Electric'];
 const TRANSMISSIONS = ['Automatic','Manual','CVT'];
-const BODY_STYLES = ['SUV','Sedan','Coupe','Convertible','Hatchback','Truck','Van','Wagon'];
+const BODY_STYLES = ['SUV','Sedan','Coupe','Convertible','Hatchback','Truck','Mini Truck','Van','Wagon'];
 const SORT_OPTIONS = [['newest','Newest'],['price_asc','Price: Low to High'],['price_desc','Price: High to Low'],['year_desc','Year: Newest'],['year_asc','Year: Oldest'],['mileage_asc','Mileage: Low to High']];
 const RADII = [['10','10 mi'],['25','25 mi'],['50','50 mi'],['100','100 mi']];
 const CarFilters = ({ filters, onChange }) => {
