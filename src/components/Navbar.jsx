@@ -23,8 +23,8 @@ const Navbar = () => {
       </button>
       <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
         <Link to="/" className={active('/')} onClick={() => setMenuOpen(false)}>Cars</Link>
-        <Link to="/?type=truck" className={active('/?type=truck')} onClick={() => setMenuOpen(false)}>Trucks</Link>
         <Link to="/?type=mini_truck" className={active('/?type=mini_truck')} onClick={() => setMenuOpen(false)}>Mini Trucks</Link>
+        <Link to="/?type=truck" className={active('/?type=truck')} onClick={() => setMenuOpen(false)}>Trucks</Link>
         <Link to="/plates" onClick={() => setMenuOpen(false)}>Plates</Link>
         <Link to="/sell" onClick={() => setMenuOpen(false)}>Sell Car</Link>
         <Link to="/plates/sell" onClick={() => setMenuOpen(false)}>Sell Plate</Link>
