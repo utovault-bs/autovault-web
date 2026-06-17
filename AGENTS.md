@@ -38,3 +38,11 @@ You are working with a **non-technical project owner**. They do not understand w
 2. Do all the technical work (code, configs, git, deployment)
 3. Confirm it's done and tell them what changed in simple terms
 4. If something needs their action (API keys, account setup), tell them exactly what to do
+
+## Git Safety Rules
+
+1. **Map before act.** Before any git operation, run a full recursive directory tree to verify file locations. Never assume files are where the summary says — verify on disk.
+2. **Stage specific files only.** Never use `git add -A`, `git add .`, or any bulk staging. Always list files by exact path.
+3. **Show the diff.** Before every commit, run `git status --short` and `git diff --stat` and present the files to the user.
+4. **Verify the remote.** Before push, check `git log --oneline -3` and `git diff origin/main --stat` to confirm what will be pushed is correct.
+5. **Transaction mindset.** Every git operation is a transaction: plan it, verify the state, execute, verify the result. If unsure, ask the user.

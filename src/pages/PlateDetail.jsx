@@ -52,7 +52,7 @@ const PlateDetail = () => {
         </div>
         {plate.description && <div className="description"><h3>Description</h3><p>{plate.description}</p></div>}
         {plate.categories?.length > 0 && <div className="description"><h3>Categories</h3><p>{plate.categories.map(c => c.name).join(', ')}</p></div>}
-        {isSeller && <div className="seller-actions"><button onClick={loadOffers} className="btn-buy">View Offers ({plate.watchers_count})</button></div>}
+        {isSeller && <div className="seller-actions"><button onClick={loadOffers} className="btn-buy">View Offers</button></div>}
         {showOffers && (
           <div className="description"><h3>Offers</h3>
             {offers.length === 0 ? <p>No offers yet</p> : offers.map(o => <div key={o.id} className="offer-item"><p><strong>{o.buyer_name}</strong> offered {fmt(o.amount)}</p><p>{o.message}</p><p className="status">{o.status}</p>{o.status === 'pending' && <div style={{ display: 'flex', gap: 8, marginTop: 8 }}><button onClick={() => handleOfferResponse(o.id, 'accepted')}>Accept</button><button onClick={() => handleOfferResponse(o.id, 'rejected')}>Decline</button></div>}</div>)}

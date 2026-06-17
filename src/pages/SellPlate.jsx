@@ -13,8 +13,9 @@ const SellPlate = () => {
   const [previewUrls, setPreviewUrls] = useState([]);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ title: '', plate_text: '', jurisdiction: 'CA', type: 'vanity', condition: 'Used', price: '', description: '', transferable: true, category_ids: [] });
+  useEffect(() => { if (!user) navigate('/login', { state: { from: '/plates/sell' } }); }, [user, navigate]);
   useEffect(() => { getPlateCategories().then(r => setCategories(r.data)).catch(() => {}); }, []);
-  if (!user) { navigate('/login', { state: { from: '/plates/sell' } }); return null; }
+  if (!user) return null;
   const handleImageSelect = (e) => {
     const files = Array.from(e.target.files);
     if (files.length + images.length > 5) { alert('Max 5 images'); return; }
