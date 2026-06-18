@@ -5,7 +5,7 @@ const Navbar = () => {
   const { user, logout, isAdmin } = useAuth();
   const { pathname, search } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [budgetOpen, setBudgetOpen] = useState(false);
+
   const active = (path) => pathname + search === path ? 'active' : '';
   return (
     <nav className="navbar">
@@ -24,25 +24,10 @@ const Navbar = () => {
       </button>
       <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
         <Link to="/" className={active('/')} onClick={() => setMenuOpen(false)}>Vehicles</Link>
-        <div className="budget-nav-item" onMouseEnter={() => setBudgetOpen(true)} onMouseLeave={() => setBudgetOpen(false)}>
-          <button className="budget-nav-btn" onClick={() => setBudgetOpen(!budgetOpen)}>Budget ▾</button>
-          <div className={`budget-nav-dropdown ${budgetOpen ? 'open' : ''}`}>
-            <Link to="/budget/5000" onClick={() => { setBudgetOpen(false); setMenuOpen(false); }}>$5,000 & Under</Link>
-            <Link to="/budget/10000" onClick={() => { setBudgetOpen(false); setMenuOpen(false); }}>$10,000 & Under</Link>
-            <Link to="/budget/15000" onClick={() => { setBudgetOpen(false); setMenuOpen(false); }}>$15,000 & Under</Link>
-            <Link to="/budget/20000" onClick={() => { setBudgetOpen(false); setMenuOpen(false); }}>$20,000 & Under</Link>
-          </div>
-        </div>
+        <Link to="/budget/5000" className={active('/budget/5000')} onClick={() => setMenuOpen(false)}>Budget</Link>
         <Link to="/plates" onClick={() => setMenuOpen(false)}>Plates</Link>
         <Link to="/sell" onClick={() => setMenuOpen(false)}>Sell Car</Link>
         <Link to="/plates/sell" onClick={() => setMenuOpen(false)}>Sell Plate</Link>
-        <div className="mobile-budget-group">
-          <span className="mobile-budget-label">Budget</span>
-          <Link to="/budget/5000" onClick={() => setMenuOpen(false)}>$5,000 & Under</Link>
-          <Link to="/budget/10000" onClick={() => setMenuOpen(false)}>$10,000 & Under</Link>
-          <Link to="/budget/15000" onClick={() => setMenuOpen(false)}>$15,000 & Under</Link>
-          <Link to="/budget/20000" onClick={() => setMenuOpen(false)}>$20,000 & Under</Link>
-        </div>
         {user ? (
           <>
             <Link to="/my-listings" onClick={() => setMenuOpen(false)}>My Listings</Link>
