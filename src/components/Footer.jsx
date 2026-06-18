@@ -8,9 +8,7 @@ const Footer = () => (
       </div>
       <div className="footer-col">
         <h4>Browse</h4>
-        <Link to="/">Cars</Link>
-        <Link to="/?type=mini_truck">Mini Trucks</Link>
-        <Link to="/?type=truck">Trucks</Link>
+        <Link to="/">Vehicles</Link>
         <Link to="/plates">License Plates</Link>
       </div>
       <div className="footer-col">

@@ -196,8 +196,6 @@ select option { background: var(--surface); color: var(--text); }
 .browse-page { max-width: 1400px; margin: 0 auto; padding: 24px; }
 .browse-header { margin-bottom: 24px; text-align: center; }
 .browse-header h1 { font-size: 1.75rem; margin-bottom: 12px; }
-.sell-cta { display: inline-block; margin-bottom: 20px; padding: 10px 28px; background: var(--red); color: #fff; border-radius: var(--radius); font-weight: 600; text-decoration: none; transition: background 0.2s; }
-.sell-cta:hover { background: var(--red-hover); color: #fff; }
 .browse-header .subtitle { color: var(--text2); font-size: 1rem; margin-bottom: 24px; }
 .filters-panel { max-width: 900px; margin-left: auto; margin-right: auto; background: var(--surface); border-radius: 12px; padding: 20px; margin-bottom: 36px; border: 1px solid var(--border); }
 .filters-header { display: flex; gap: 16px; align-items: center; margin-bottom: 12px; }
@@ -234,7 +232,11 @@ select option { background: var(--surface); color: var(--text); }
 .results-header { margin-bottom: 16px; color: var(--text2); text-align: center; }
 .results-toolbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; padding: 8px 0; }
 .results-count { color: var(--text2); font-size: 0.9rem; }
-.view-toggle { display: flex; gap: 4px; }
+.view-toggle { display: flex; gap: 4px; justify-content: flex-end; }
+.budget-buttons { display: flex; gap: 10px; justify-content: center; margin-bottom: 24px; flex-wrap: wrap; }
+.budget-btn { padding: 10px 24px; background: var(--red); color: #fff; border: none; border-radius: var(--radius); font-weight: 600; cursor: pointer; transition: background 0.2s; }
+.budget-btn:hover { background: var(--red-hover); }
+.budget-btn.active { outline: 2px solid #fff; outline-offset: 2px; }
 .view-btn { display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); color: var(--text2); cursor: pointer; transition: all 0.2s; }
 .view-btn:hover { border-color: var(--red); color: var(--text); }
 .view-btn.active { background: var(--red); color: #fff; border-color: var(--red); }
