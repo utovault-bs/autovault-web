@@ -461,6 +461,17 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 .offer-item button:hover { background: var(--red-hover); }
 .watchers { font-size: 0.85rem; color: var(--text2); }
 
+/* Footer */
+.footer { background: var(--surface); border-top: 1px solid var(--border); padding: 40px 24px 20px; margin-top: 60px; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+.footer-col h4 { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+.footer-col p { font-size: 0.85rem; color: var(--text2); line-height: 1.5; }
+.footer-col a { display: block; font-size: 0.85rem; color: var(--text2); padding: 4px 0; transition: color 0.2s; }
+.footer-col a:hover { color: var(--red); }
+.footer-bottom { max-width: 1200px; margin: 24px auto 0; padding-top: 16px; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--text3); text-align: center; }
+@media (max-width: 768px) { .footer-inner { grid-template-columns: repeat(2, 1fr); gap: 24px; } }
+@media (max-width: 480px) { .footer-inner { grid-template-columns: 1fr; gap: 20px; } }
+
 /* Media Queries */
 @media (max-width: 900px) {
   .car-detail { grid-template-columns: 1fr; }

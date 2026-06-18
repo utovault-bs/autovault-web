@@ -1,0 +1,35 @@
+import { Link } from 'react-router-dom';
+const Footer = () => (
+  <footer className="footer">
+    <div className="footer-inner">
+      <div className="footer-col">
+        <h4>AutoVault</h4>
+        <p>The smart way to buy & sell used cars and license plates.</p>
+      </div>
+      <div className="footer-col">
+        <h4>Browse</h4>
+        <Link to="/">Cars</Link>
+        <Link to="/?type=mini_truck">Mini Trucks</Link>
+        <Link to="/?type=truck">Trucks</Link>
+        <Link to="/plates">License Plates</Link>
+      </div>
+      <div className="footer-col">
+        <h4>Sell</h4>
+        <Link to="/sell">Sell a Car</Link>
+        <Link to="/plates/sell">Sell a Plate</Link>
+        <Link to="/my-listings">My Listings</Link>
+      </div>
+      <div className="footer-col">
+        <h4>Budget</h4>
+        <Link to="/#budget-5k">Under $5,000</Link>
+        <Link to="/#budget-10k">Under $10,000</Link>
+        <Link to="/#budget-15k">Under $15,000</Link>
+        <Link to="/#budget-20k">Under $20,000</Link>
+      </div>
+    </div>
+    <div className="footer-bottom">
+      &copy; {new Date().getFullYear()} AutoVault. All rights reserved.
+    </div>
+  </footer>
+);
+export default Footer;

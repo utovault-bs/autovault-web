@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import ProtectedRoute from './components/ProtectedRoute';
 import BrowsePage from './pages/BrowsePage';
 import Login from './pages/Login';
@@ -16,5 +17,5 @@ import AdminDashboard from './pages/AdminDashboard';
 import PlatesBrowse from './pages/PlatesBrowse';
 import PlateDetail from './pages/PlateDetail';
 import SellPlate from './pages/SellPlate';
-const App = () => <AuthProvider><BrowserRouter><Navbar /><Routes><Route path="/" element={<BrowsePage />} /><Route path="/login" element={<Login />} /><Route path="/register" element={<Register />} /><Route path="/cars/:id" element={<CarDetail />} /><Route path="/sell" element={<ProtectedRoute><SellCar /></ProtectedRoute>} /><Route path="/cars/:id/edit" element={<ProtectedRoute><EditCar /></ProtectedRoute>} /><Route path="/my-listings" element={<ProtectedRoute><MyListings /></ProtectedRoute>} /><Route path="/checkout/:id" element={<ProtectedRoute><Checkout /></ProtectedRoute>} /><Route path="/order-success" element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>} /><Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} /><Route path="/admin" element={<ProtectedRoute adminOnly><AdminDashboard /></ProtectedRoute>} /><Route path="/plates" element={<PlatesBrowse />} /><Route path="/plates/:id" element={<PlateDetail />} /><Route path="/plates/sell" element={<ProtectedRoute><SellPlate /></ProtectedRoute>} /></Routes></BrowserRouter></AuthProvider>;
+const App = () => <AuthProvider><BrowserRouter><Navbar /><Routes><Route path="/" element={<BrowsePage />} /><Route path="/login" element={<Login />} /><Route path="/register" element={<Register />} /><Route path="/cars/:id" element={<CarDetail />} /><Route path="/sell" element={<ProtectedRoute><SellCar /></ProtectedRoute>} /><Route path="/cars/:id/edit" element={<ProtectedRoute><EditCar /></ProtectedRoute>} /><Route path="/my-listings" element={<ProtectedRoute><MyListings /></ProtectedRoute>} /><Route path="/checkout/:id" element={<ProtectedRoute><Checkout /></ProtectedRoute>} /><Route path="/order-success" element={<ProtectedRoute><OrderSuccess /></ProtectedRoute>} /><Route path="/messages" element={<ProtectedRoute><Messages /></ProtectedRoute>} /><Route path="/admin" element={<ProtectedRoute adminOnly><AdminDashboard /></ProtectedRoute>} /><Route path="/plates" element={<PlatesBrowse />} /><Route path="/plates/:id" element={<PlateDetail />} /><Route path="/plates/sell" element={<ProtectedRoute><SellPlate /></ProtectedRoute>} /></Routes><Footer /></BrowserRouter></AuthProvider>;
 export default App;
