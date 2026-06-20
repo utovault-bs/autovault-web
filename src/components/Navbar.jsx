@@ -10,12 +10,7 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <Link to="/" className="logo">
-        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" style={{ marginRight: 8, verticalAlign: 'middle' }}>
-          <rect width="28" height="28" rx="6" fill="#111"/>
-          <path d="M8 14h12M14 8v12M6 10l16 4M6 18l16-4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round"/>
-          <circle cx="14" cy="14" r="10" stroke="#fff" strokeWidth="1.5" fill="none"/>
-        </svg>
-        AutoVault
+        <img src="/logo.svg" alt="AutoVault" width="130" height="30" style={{ display: 'block' }} />
       </Link>
       <button className="hamburger" onClick={() => setMenuOpen(!menuOpen)} aria-label="Menu">
         <span className={menuOpen ? 'open' : ''}></span>
@@ -23,6 +18,7 @@ const Navbar = () => {
         <span className={menuOpen ? 'open' : ''}></span>
       </button>
       <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
+        <Link to="/advertise" onClick={() => setMenuOpen(false)}>Advertise</Link>
         <Link to="/" className={active('/')} onClick={() => setMenuOpen(false)}>Vehicles</Link>
         <Link to="/budget/5000" className={active('/budget/5000')} onClick={() => setMenuOpen(false)}>Budget</Link>
         <Link to="/plates" onClick={() => setMenuOpen(false)}>Plates</Link>
