@@ -450,7 +450,7 @@ button:disabled { opacity: 0.5; cursor: not-allowed; }
 
 /* Footer */
 .footer { background: var(--surface); border-top: 1px solid var(--border); padding: 40px 24px 20px; margin-top: 60px; }
-.footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+.footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
 .footer-col h4 { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
 .footer-col p { font-size: 0.85rem; color: var(--text2); line-height: 1.5; }
 .footer-col a { display: block; font-size: 0.85rem; color: var(--text2); padding: 4px 0; transition: color 0.2s; }
@@ -607,5 +607,3 @@ body:has(.launch-page) .footer { display: none; }
 .terms-back { margin-top: 40px; }
 .terms-back a { color: var(--red); text-decoration: none; font-weight: 600; }
 .terms-back a:hover { text-decoration: underline; }
-.footer-terms { display: block; margin-top: 12px; font-size: 0.85rem; color: var(--text2); text-decoration: none; }
-.footer-terms:hover { color: var(--text); }
