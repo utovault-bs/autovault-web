@@ -5,6 +5,7 @@ const Footer = () => (
       <div className="footer-col">
         <h4>AutoVault</h4>
         <p>The smart way to buy & sell used cars and license plates.</p>
+        <Link to="/terms" className="footer-terms">Terms &amp; Conditions</Link>
       </div>
       <div className="footer-col">
         <h4>Browse</h4>
