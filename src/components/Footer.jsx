@@ -16,6 +16,9 @@ const Footer = () => (
         <Link to="/sell">Sell a Car</Link>
         <Link to="/plates/sell">Sell a Plate</Link>
         <Link to="/my-listings">My Listings</Link>
+      </div>
+      <div className="footer-col">
+        <h4>Legal</h4>
         <Link to="/terms">Terms &amp; Conditions</Link>
       </div>
     </div>
