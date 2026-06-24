@@ -1,0 +1,21 @@
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { useCars } from '../hooks/useCars';
+import CarCard from '../components/CarCard';
+import CarFilters from '../components/CarFilters';
+import Pagination from '../components/Pagination';
+import { getCars } from '../api/cars';
+import { fmtPrice } from '../utils/format';
+const VehiclePage = () => {
+const [filters, setFilters] = useState({ search: '', make: '', minPrice: '', maxPrice: '', fuel_type: '', transmission: '', body_style: '', zip: '', radius: '', lat: '', lng: '', sortBy: 'newest', page: 1 });
+  const { cars, loading, error, totalPages } = useCars(filters, filters.page);
+  const [featured, setFeatured] = useState([]);
+  const [featuredIdx, setFeaturedIdx] = useState(0);
+  const [view, setView] = useState(localStorage.getItem('autovault-view') || 'grid');
+  const switchView = (v) => { setView(v); localStorage.setItem('autovault-view', v); };
+  useEffect(() => { getCars({ sortBy: 'newest', limit: 5 }).then(r => setFeatured(r.data.cars)).catch(() => {}); }, []);
+  useEffect(() => { if (featured.length === 0) return; const t = setInterval(() => setFeaturedIdx(i => (i + 1) % featured.length), 4000); return () => clearInterval(t); }, [featured.length]);
+  const handlePage = (p) => { setFilters(f => ({...f, page: p})); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  return <div className="browse-page">{featured.length > 0 && <div className="featured-section"><div className="featured-fade">{featured.map((car, i) => <Link key={car.id} to={`/cars/${car.id}`} className={`featured-card${i === featuredIdx ? ' visible' : ''}`}><div className="featured-image"><img src={car.images?.[0]?.url || car.main_image} alt={`${car.year} ${car.make} ${car.model}`} /><span className="featured-badge">Featured</span></div><div className="featured-info"><h2>{car.year} {car.make} {car.model}</h2><p className="featured-trim">{car.trim}</p><p className="featured-price">{fmtPrice(car.price)}</p><p className="featured-desc">{car.description}</p><span className="featured-link">View Details →</span></div></Link>)}</div><div className="featured-dots">{featured.map((_, i) => <button key={i} className={`dot${i === featuredIdx ? ' active' : ''}`} onClick={() => setFeaturedIdx(i)} />)}</div></div>}<div className="browse-header"><h1>Find Your Next Car</h1><p className="subtitle">Browse used vehicles from private sellers</p></div><CarFilters filters={filters} onChange={setFilters} /><div className="view-toggle"><button className={`view-btn${view === 'grid' ? ' active' : ''}`} onClick={() => switchView('grid')} aria-label="Grid view"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="1" width="6" height="6" rx="1"/><rect x="9" y="1" width="6" height="6" rx="1"/><rect x="1" y="9" width="6" height="6" rx="1"/><rect x="9" y="9" width="6" height="6" rx="1"/></svg></button><button className={`view-btn${view === 'list' ? ' active' : ''}`} onClick={() => switchView('list')} aria-label="List view"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><rect x="1" y="2" width="14" height="3" rx="1"/><rect x="1" y="6.5" width="14" height="3" rx="1"/><rect x="1" y="11" width="14" height="3" rx="1"/></svg></button></div>{loading ? <div className="spinner">Loading...</div> : error ? <div className="error">{error}</div> : cars.length === 0 ? <div className="no-results"><h2>No cars found</h2><p>Try adjusting your filters</p></div> : <><h2 className="section-heading">Recommended for You</h2><div className={view === 'grid' ? 'car-grid' : 'car-list'}>{cars.map(car => <CarCard key={car.id} car={car} />)}</div><Pagination currentPage={filters.page} totalPages={totalPages} onPageChange={handlePage} /></>}</div>;
+};
+export default VehiclePage;

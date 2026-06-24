@@ -1,0 +1,21 @@
+import { useState, useEffect, useRef } from 'react';
+import { useAuth } from '../context/AuthContext';
+import api from '../api/client';
+const Messages = () => {
+  const { user } = useAuth();
+  const [conversations, setConversations] = useState([]);
+  const [activeConvId, setActiveConvId] = useState(null);
+  const [activeCarId, setActiveCarId] = useState(null);
+  const [messages, setMessages] = useState([]);
+  const [text, setText] = useState('');
+  const [loading, setLoading] = useState(true);
+  const bottomRef = useRef(null);
+  useEffect(() => { api.get('/messages/conversations').then(({ data }) => { setConversations(data); setLoading(false); if (data.length) { setActiveConvId(data[0].id); setActiveCarId(data[0].car_id); } }).catch(() => setLoading(false)); }, []);
+  useEffect(() => { if (!activeConvId) return; api.get(`/messages/${activeConvId}`).then(({ data }) => setMessages(data)).catch(() => {}); }, [activeConvId]);
+  useEffect(() => { bottomRef.current?.scrollIntoView({ behavior: 'smooth' }); }, [messages]);
+  const selectConv = (conv) => { setActiveConvId(conv.id); setActiveCarId(conv.car_id); };
+  const sendMessage = async (e) => { e.preventDefault(); if (!text.trim() || !activeCarId) return; try { const { data } = await api.post('/messages', { carId: activeCarId, content: text }); setMessages(m => [...m, data]); setText(''); } catch {} };
+  const activeConv = conversations.find(c => c.id === activeConvId);
+  return <div className="messages-page"><div className="conv-list"><h3>Conversations</h3>{loading ? <p>Loading...</p> : conversations.length === 0 ? <p className="no-conv">No conversations yet.</p> : conversations.map(c => <button key={c.id} className={`conv-item ${c.id === activeConvId ? 'active' : ''}`} onClick={() => selectConv(c)}><strong>{c.participants?.filter(p => p.id !== user?.id).map(p => p.name).join(', ') || 'Conversation'}</strong><span className="last-msg">{c.last_message?.content?.slice(0, 40) || ''}</span></button>)}</div><div className="msg-area"><div className="msg-header"><h3>Messages</h3></div><div className="messages">{messages.map((m, i) => <div key={i} className={`msg ${m.sender_id === user?.id ? 'own' : ''}`}><div className="msg-bubble"><p>{m.content}</p><span className="msg-time">{new Date(m.created_at).toLocaleDateString()}</span></div></div>)}<div ref={bottomRef} /></div><form className="msg-input" onSubmit={sendMessage}><input type="text" placeholder="Type a message..." value={text} onChange={e => setText(e.target.value)} /><button type="submit">Send</button></form></div></div>;
+};
+export default Messages;
