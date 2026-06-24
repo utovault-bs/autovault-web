@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 const Navbar = () => {
-  const { user, logout, isAdmin } = useAuth();
+  const { user, logout, isAdmin, isDealer } = useAuth();
   const { pathname, search } = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -19,6 +19,7 @@ const Navbar = () => {
       </button>
       <div className={`nav-links ${menuOpen ? 'open' : ''}`}>
         <Link to="/advertise" onClick={() => setMenuOpen(false)}>Advertise</Link>
+        <Link to="/pricing" onClick={() => setMenuOpen(false)}>Pricing</Link>
         <Link to="/" className={active('/')} onClick={() => setMenuOpen(false)}>Vehicles</Link>
         <Link to="/budget/5000" className={active('/budget/5000')} onClick={() => setMenuOpen(false)}>Budget</Link>
         <Link to="/plates" onClick={() => setMenuOpen(false)}>Plates</Link>
@@ -28,6 +29,7 @@ const Navbar = () => {
           <>
             <Link to="/my-listings" onClick={() => setMenuOpen(false)}>My Listings</Link>
             <Link to="/messages" onClick={() => setMenuOpen(false)}>Messages</Link>
+            {(isDealer() || isAdmin()) && <Link to="/dashboard" onClick={() => setMenuOpen(false)}>Dashboard</Link>}
             {isAdmin() && <Link to="/admin" onClick={() => setMenuOpen(false)}>Admin</Link>}
             <span className="user-name">{user.name}</span>
             <button onClick={() => { logout(); setMenuOpen(false); }}>Sign Out</button>

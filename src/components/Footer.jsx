@@ -15,6 +15,7 @@ const Footer = () => (
         <h4>Sell</h4>
         <Link to="/sell">Sell a Car</Link>
         <Link to="/plates/sell">Sell a Plate</Link>
+        <Link to="/pricing">Dealer Plans</Link>
         <Link to="/my-listings">My Listings</Link>
       </div>
       <div className="footer-col">

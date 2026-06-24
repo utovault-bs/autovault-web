@@ -9,6 +9,11 @@ export const AuthProvider = ({ children }) => {
   const register = async (userData) => { const { data } = await api.post('/auth/register', userData); localStorage.setItem('token', data.token); setUser(data.user); return data.user; };
   const logout = () => { localStorage.removeItem('token'); setUser(null); };
   const isAdmin = () => user?.role === 'admin';
-  return <AuthContext.Provider value={{ user, login, register, logout, isAdmin, loading }}>{children}</AuthContext.Provider>;
+  const isDealer = () => user?.tier_slug && user?.tier_slug !== 'free';
+  const listingsLeft = () => {
+    if (!user || user.listings_limit == null) return null;
+    return Math.max(0, user.listings_limit - (user.listings_used || 0));
+  };
+  return <AuthContext.Provider value={{ user, login, register, logout, isAdmin, isDealer, listingsLeft, loading }}>{children}</AuthContext.Provider>;
 };
 export const useAuth = () => useContext(AuthContext);
